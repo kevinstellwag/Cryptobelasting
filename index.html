@@ -38,12 +38,6 @@
                 </div>
             </div>
 
-            <div class="glass p-6 rounded-[2rem] space-y-4">
-                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest px-1">Top Assets (EUR)</h3>
-                <div id="coin-list" class="space-y-2 text-sm">
-                    <!-- API Data -->
-                </div>
-            </div>
 <div class="glass p-6 rounded-[2rem] mt-8">
     <h3 class="text-xs font-black text-slate-500 mb-4 uppercase tracking-widest">Laatste Crypto Nieuws</h3>
     <div id="news-feed" class="space-y-4">
@@ -146,18 +140,18 @@
     </style>
 
     <script>
-        const coins = ['bitcoin', 'ethereum', 'solana', 'cardano', 'ripple'];
+       const coins = ['bitcoin', 'ethereum', 'solana', 'cardano', 'ripple', 'polkadot', 'dogecoin', 'chainlink', 'avalanche-2', 'polygon'];
+
+async function fetchAPI() {
+    // VERVANG 'JOUW_API_KEY_HIER' door de key die je net hebt aangemaakt
+    const apiKey = 'CG-7zrmnK5QQsj7s1xD2J75gaLp'; 
+    const url = `https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=bitcoin&x_cg_demo_api_key=CG-7zrmnK5QQsj7s1xD2J75gaLp{coins.join(',')}&vs_currencies=eur&x_cg_demo_api_key=${apiKey}`;
+
+    try {
+        const res = await fetch(url);
         
-        async function updateMarket() {
-            try {
-                const res = await fetch(`https://api.coingecko.com{coins.join(',')}&vs_currencies=eur`);
-                const data = await res.json();
-                const list = document.getElementById('coin-list');
-                list.innerHTML = '';
-                Object.keys(data).forEach(c => {
-                    list.innerHTML += `<div class="flex justify-between border-b border-white/5 pb-2 text-[11px]"><span class="capitalize text-slate-400">${c}</span> <span class="font-bold font-mono text-yellow-500">€${data[c].eur.toLocaleString()}</span></div>`;
-                });
-            } catch(e) { console.log("API limit reached"); }
+        if (!res.ok) {
+            throw new Error(`API Error: ${res.status}`);
         }
 
         function calculate() {
@@ -220,5 +214,21 @@ async function fetchNews() {
 fetchNews(); // Roep het direct aan bij laden
 
     </script>
+
+<!-- CoinGecko Attribution Footer -->
+<footer class="mt-12 py-6 border-t border-white/5 text-center">
+    <div class="flex flex-col items-center gap-2">
+        <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Marktdata geleverd door</p>
+        <a href="https://www.coingecko.com" target="_blank" rel="nofollow" class="transition hover:opacity-80">
+            <img src="https://static.coingecko.com" 
+                 alt="Crypto Prices by CoinGecko" 
+                 style="width: 120px; filter: grayscale(1) brightness(2);">
+        </a>
+        <p class="text-[9px] text-slate-600 mt-2 italic">
+            Gegevens worden met een vertraging van enkele minuten bijgewerkt via de CoinGecko API.
+        </p>
+    </div>
+</footer>
+
 </body>
 </html>
