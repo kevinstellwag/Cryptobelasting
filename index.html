@@ -190,45 +190,37 @@ range.addEventListener('input', () => {
 });
 
 async function fetchNews() {
-    const rssUrl = 'https://nl.beincrypto.com'; // Of een andere NL crypto site
-    const apiUrl = `https://api.rss2json.com{encodeURIComponent(rssUrl)}`;
+    const apiKey = 'JOUW_CRYPTOCOMPARE_KEY_HIER';
+    // We filteren op Nederlandstalig nieuws of belangrijke globale bronnen
+    const url = `https://min-api.cryptocompare.com{apiKey}`;
 
     try {
-        const res = await fetch(apiUrl);
+        const res = await fetch(url);
         const data = await res.json();
         const container = document.getElementById('news-feed');
         container.innerHTML = '';
 
-        data.items.slice(0, 4).forEach(item => {
+        // We tonen de laatste 5 berichten
+        data.Data.slice(0, 5).forEach(item => {
             container.innerHTML += `
-                <a href="${item.link}" target="_blank" class="block p-3 hover:bg-white/5 rounded-xl transition border border-transparent hover:border-white/10">
-                    <h4 class="text-[11px] font-bold text-slate-200 leading-snug">${item.title}</h4>
-                    <span class="text-[9px] text-yellow-500 uppercase mt-2 block">Lees verder →</span>
+                <a href="${item.url}" target="_blank" class="block p-4 glass rounded-2xl hover:bg-white/5 transition border border-white/5 mb-3 group">
+                    <div class="flex gap-3">
+                        <img src="${item.imageurl}" class="w-12 h-12 rounded-lg object-cover border border-white/10" alt="news">
+                        <div>
+                            <h4 class="text-[11px] font-bold text-slate-200 leading-tight group-hover:text-yellow-500">${item.title}</h4>
+                            <span class="text-[9px] text-slate-500 mt-1 block uppercase">${item.source_info.name} • ${new Date(item.published_on * 1000).toLocaleDateString()}</span>
+                        </div>
+                    </div>
                 </a>
             `;
         });
     } catch (e) {
-        console.log("Nieuws feed kon niet laden");
+        document.getElementById('news-feed').innerHTML = '<p class="text-[10px] text-slate-500 italic">Nieuws tijdelijk niet beschikbaar.</p>';
     }
 }
-fetchNews(); // Roep het direct aan bij laden
+fetchNews();
+
 
     </script>
-
-<!-- CoinGecko Attribution Footer -->
-<footer class="mt-12 py-6 border-t border-white/5 text-center">
-    <div class="flex flex-col items-center gap-2">
-        <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Marktdata geleverd door</p>
-        <a href="https://www.coingecko.com" target="_blank" rel="nofollow" class="transition hover:opacity-80">
-            <img src="https://static.coingecko.com" 
-                 alt="Crypto Prices by CoinGecko" 
-                 style="width: 120px; filter: grayscale(1) brightness(2);">
-        </a>
-        <p class="text-[9px] text-slate-600 mt-2 italic">
-            Gegevens worden met een vertraging van enkele minuten bijgewerkt via de CoinGecko API.
-        </p>
-    </div>
-</footer>
-
 </body>
 </html>
