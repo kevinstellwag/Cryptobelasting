@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CryptoMaster Pro | NL Dashboard 2026</title>
@@ -11,6 +12,19 @@
         .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.03); }
         .gold-gradient { background: linear-gradient(135deg, #f2a900 0%, #d48c00 100%); }
         input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; background: #f2a900; cursor: pointer; border-radius: 50%; border: 3px solid #000; }
+
+        /* Dit geldt alleen voor schermen kleiner dan 600 pixels */
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 14px;
+    padding: 10px;
+  }
+  .button {
+    width: 100%; /* De Bitvavo knop wordt over de hele breedte voor makkelijk klikken */
+    padding: 15px;
+  }
+}
+        
     </style>
 </head>
 
