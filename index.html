@@ -13,8 +13,8 @@
         input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; background: #f2a900; cursor: pointer; border-radius: 50%; border: 3px solid #000; }
     </style>
 </head>
-<body class="min-h-screen">
 
+<body class="min-h-screen">
     <!-- Top Ticker -->
     <div class="w-full bg-yellow-500 text-black py-1 overflow-hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-tighter italic">
         <div class="animate-pulse inline-block px-4">
@@ -22,37 +22,43 @@
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto p-4 md:p-8 grid lg:grid-cols-12 gap-8">
+    <div class="max-w-7xl mx-auto p-4 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        <!-- Linker Kolom: Nieuws & Sentiment -->
+         <!-- LINKER KOLOM: Nieuws & Affiliate -->
         <aside class="lg:col-span-4 space-y-6">
-            <div class="glass p-8 rounded-[2.5rem]">
-                <h3 class="text-xs font-black text-slate-500 mb-6 uppercase tracking-widest">Crypto Nieuws 2026</h3>
-                <div class="glass p-6 rounded-[2rem] border border-white/5">
-    <h3 class="text-xs font-black text-slate-500 mb-4 uppercase tracking-widest text-yellow-500">Live Crypto News</h3>
-    <!-- Deze box vult zichzelf via de externe widget -->
-    <div id="crypto-news-widget" style="height: 500px; overflow: hidden; border-radius: 1.5rem;">
-        <iframe src="https://rss.app" 
-                frameborder="0" 
-                style="width: 100%; height: 100%; border: none;">
-        </iframe>
-    </div>
-</div>
+            <!-- TradingView Widget Box -->
+            <div class="glass p-6 rounded-[2.5rem] border border-white/5 overflow-hidden" style="height: 600px;">
+                <h3 class="text-xs font-black text-slate-500 mb-4 uppercase tracking-widest text-yellow-500 italic">Markt Updates</h3>
+                <div class="tradingview-widget-container" style="height: 500px; width: 100%;">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+                    {
+                      "feedMode": "all_symbols",
+                      "isTransparent": true,
+                      "displayMode": "regular",
+                      "width": "100%",
+                      "height": "100%",
+                      "colorTheme": "dark",
+                      "locale": "nl"
+                    }
+                    </script>
+                </div>
             </div>
+           
 
-            <div class="gold-gradient p-8 rounded-[2.5rem] text-black space-y-4 shadow-xl shadow-yellow-500/10">
+            <div class="gold-gradient p-8 rounded-[2.5rem] text-black space-y-4 shadow-xl">
                 <p class="text-xs font-black uppercase tracking-tighter">Beste NL Exchange</p>
-                <div class="text-3xl font-black italic">BITVAVO</div>
-                <p class="text-[11px] font-bold leading-tight opacity-80">Claim je bonus: Eerste €10.000 handelen zonder kosten.</p>
+                <div class="text-3xl font-black italic uppercase">Bitvavo</div>
+                <p class="text-[11px] font-bold leading-tight opacity-80 italic">Eerste €10.000 handelen zonder kosten.</p>
                 <a href="JOUW_LINK" target="_blank" class="block bg-black text-white py-4 rounded-2xl font-bold text-center hover:scale-105 transition">Start Nu →</a>
             </div>
         </aside>
 
-        <!-- Rechter Kolom: Calculator & Moon Sim -->
+        <!-- RECHTER KOLOM: Dashboard & Calculator -->
         <main class="lg:col-span-8 space-y-8">
-            <header class="mb-10">
-                <h1 class="text-6xl font-black italic tracking-tighter mb-2 italic uppercase">CRYPTO<span class="text-yellow-500">MASTER</span></h1>
-                <p class="text-slate-400 text-lg">Winst-optimalisatie en belasting gids voor de Nederlandse markt.</p>
+            <header>
+                <h1 class="text-6xl font-black italic tracking-tighter mb-2 uppercase">CRYPTO<span class="text-yellow-500">MASTER</span></h1>
+                <p class="text-slate-400 text-lg">Winst-optimalisatie en belasting gids 2026.</p>
             </header>
 
             <!-- De Calculator -->
