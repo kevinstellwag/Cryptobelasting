@@ -139,28 +139,26 @@
         </div>
 
         <!-- Contact Form -->
-        <section class="contact-card space-y-6">
-            <h2 class="text-xl font-black italic uppercase tracking-tight">Stuur een bericht</h2>
-            
-            <div class="space-y-4">
-                <div>
-                    <label class="text-[10px] font-black text-slate-500 uppercase ml-2 mb-1 block italic">Jouw Naam</label>
-                    <input type="text" placeholder="bijv. Satoshi" class="input-field">
-                </div>
-                
-                <div>
-                    <label class="text-[10px] font-black text-slate-500 uppercase ml-2 mb-1 block italic">Email Adres</label>
-                    <input type="email" placeholder="naam@voorbeeld.nl" class="input-field">
-                </div>
+        <section class="contact-card">
+    <h2 class="text-xl font-black italic uppercase tracking-tight mb-6">Stuur een bericht</h2>
+    
+    <form action="https://formspree.io/f/mojnejje" method="POST" class="space-y-4">
+        <div>
+            <label class="text-[10px] font-black text-slate-500 uppercase ml-2 mb-1 block italic">Email Adres</label>
+            <input type="email" name="email" required placeholder="naam@voorbeeld.nl" class="input-field">
+        </div>
 
-                <div>
-                    <label class="text-[10px] font-black text-slate-500 uppercase ml-2 mb-1 block italic">Bericht</label>
-                    <textarea rows="4" placeholder="Waar kunnen we je mee helpen?" class="input-field"></textarea>
-                </div>
+        <div>
+            <label class="text-[10px] font-black text-slate-500 uppercase ml-2 mb-1 block italic">Jouw Bericht</label>
+            <textarea name="message" required rows="4" placeholder="Waar kunnen we je mee helpen?" class="input-field"></textarea>
+        </div>
 
-                <button onclick="sendMessage()" class="btn-send">Bericht Verzenden</button>
-            </div>
-        </section>
+        <!-- Optioneel: verborgen veld voor je eigen administratie -->
+        <input type="hidden" name="_subject" value="Nieuw bericht van cryptobelasting.online">
+
+        <button type="submit" class="btn-send">Bericht Verzenden</button>
+    </form>
+</section>
 
         <!-- Footer Info -->
         <div class="text-center space-y-2 opacity-40">
