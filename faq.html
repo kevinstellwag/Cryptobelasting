@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <link rel="icon" href="logo.png" type="image/x-icon">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2701308923489266"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FAQ - CryptoMaster Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+   <script defer src="/_vercel/insights/script.js"></script>
+    <style>
+        :root { --accent: #f2a900; --bg: #020617; }
+        body { 
+            background: var(--bg); 
+            color: #f8fafc; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            overflow-x: hidden;
+        }
+
+        .app-header {
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+        .sidebar.active { left: 0; }
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            z-index: 999;
+        }
+        .sidebar-overlay.active { display: block; }
+
+        /* FAQ Card Styling */
+        .faq-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: rgba(0,0,0,0.2);
+        }
+        .faq-answer p { padding: 1.5rem; color: #94a3b8; line-height: 1.6; }
+        
+        .faq-card.open .faq-answer { max-height: 500px; }
+        .faq-card.open .chevron { transform: rotate(180deg); }
+        .chevron { transition: transform 0.3s; }
+    </style>
+</head>
+<body class="pb-20">
+
+    <!-- Header -->
+    <div class="app-header py-4 px-6 flex justify-between items-center">
+        <button onclick="toggleMenu()" class="text-white focus:outline-none">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+        <span class="text-[10px] font-black italic bg-yellow-500 text-black px-3 py-1 rounded-full uppercase">FAQ Center</span>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleMenu()"></div>
+    <nav id="sidebar" class="sidebar p-8">
+        <div class="mb-10 text-2xl font-black italic uppercase">
+            CRYPTO<span class="text-yellow-500">MASTER</span>
+        </div>
+        <div class="flex flex-col gap-6">
+            <a href="index.html" class="text-white/70 hover:text-white font-bold italic uppercase tracking-tighter">Calculator</a>
+            <a href="nieuws.html" class="text-white/70 hover:text-white font-bold italic uppercase tracking-tighter">Nieuws</a>
+            <a href="gids.html" class="text-white/70 hover:text-white font-bold italic uppercase tracking-tighter">Gids</a>
+            <a href="faq.html" class="text-yellow-500 font-bold italic uppercase tracking-tighter flex items-center gap-2">
+                <span class="w-2 h-2 bg-yellow-500 rounded-full"></span> Veelgestelde Vragen
+            </a>
+        </div>
+    </nav>
+
+    <div class="p-6 max-w-md mx-auto space-y-6">
+        
+        <header class="py-4">
+            <h1 class="text-4xl font-black italic tracking-tighter uppercase leading-none mb-2">Hulp & <span class="text-yellow-500">FAQ</span></h1>
+            <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Antwoorden op jouw belastingvragen</p>
+        </header>
+
+        <!-- Search Bar (Simulatie) -->
+        <div class="relative">
+            <input type="text" placeholder="Zoek een onderwerp..." class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-sm focus:outline-none focus:border-yellow-500">
+        </div>
+
+        <!-- FAQ Items -->
+        <div class="space-y-4">
+            <!-- Vraag 1 -->
+            <div class="faq-card" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span class="font-bold italic uppercase text-sm tracking-tight">Hoeveel crypto is belastingvrij?</span>
+                    <svg class="chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="faq-answer">
+                    <p>In 2024 en 2025 is het heffingsvrij vermogen in Box 3 vastgesteld op **€57.000** per persoon (of het dubbele met een fiscale partner). Blijft je totale vermogen hieronder? Dan betaal je geen belasting.</p>
+                </div>
+            </div>
+
+            <!-- Vraag 2 -->
+            <div class="faq-card" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span class="font-bold italic uppercase text-sm tracking-tight">Welke datum telt voor de koers?</span>
+                    <svg class="chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="faq-answer">
+                    <p>De Belastingdienst kijkt altijd naar de waarde op **1 januari om 00:00 uur** (de peildatum). Wat er gedurende het jaar met de koers gebeurt, heeft geen directe invloed op je aangifte van dat jaar.</p>
+                </div>
+            </div>
+
+            <!-- Vraag 3 -->
+            <div class="faq-card" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span class="font-bold italic uppercase text-sm tracking-tight">Wat is de DAC8 richtlijn?</span>
+                    <svg class="chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="faq-answer">
+                    <p>DAC8 is een nieuwe EU-richtlijn die cryptoplatforms (zoals Bitvavo) verplicht om gegevens van gebruikers te delen met de Belastingdienst. Het wordt dus steeds belangrijker om eerlijk aangifte te doen.</p>
+                </div>
+            </div>
+
+            <!-- Vraag 4 -->
+            <div class="faq-card" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span class="font-bold italic uppercase text-sm tracking-tight">Moet ik staking-rewards opgeven?</span>
+                    <svg class="chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="faq-answer">
+                    <p>Ja, staking-rewards verhogen je totale bezit. Op de peildatum (1 januari) telt de totale waarde van je portfolio, inclusief alle verkregen rewards.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Help -->
+        <div class="p-8 text-center bg-yellow-500/10 border border-yellow-500/20 rounded-[2.5rem]">
+            <h3 class="font-black italic uppercase mb-2">Nog vragen?</h3>
+            <p class="text-xs text-slate-400 mb-4">Onze uitgebreide gids helpt je stap voor stap door je aangifte heen.</p>
+            <a href="gids.html" class="inline-block bg-yellow-500 text-black px-6 py-3 rounded-xl font-black uppercase italic text-xs">Bekijk de Gids</a>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('sidebarOverlay').classList.toggle('active');
+        }
+
+        function toggleFaq(element) {
+            // Sluit andere open items (optioneel)
+            const allCards = document.querySelectorAll('.faq-card');
+            allCards.forEach(card => {
+                if(card !== element) card.classList.remove('open');
+            });
+
+            // Toggle huidige item
+            element.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
