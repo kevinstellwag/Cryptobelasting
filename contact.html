@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <link rel="icon" href="logo.png" type="image/x-icon">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2701308923489266"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Contact - CryptoMaster Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+<script defer src="/_vercel/insights/script.js"></script>
+    <style>
+        :root { --accent: #f2a900; --bg: #020617; }
+        body { 
+            background: var(--bg); 
+            color: #f8fafc; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .app-header {
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+        .sidebar.active { left: 0; }
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            z-index: 999;
+        }
+        .sidebar-overlay.active { display: block; }
+
+        /* Contact Cards */
+        .contact-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.7));
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 2rem;
+            padding: 1.5rem;
+        }
+
+        .input-field {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 1.2rem;
+            padding: 1rem 1.5rem;
+            width: 100%;
+            color: white;
+            transition: 0.3s;
+        }
+        .input-field:focus {
+            border-color: var(--accent);
+            outline: none;
+            background: rgba(255,255,255,0.07);
+        }
+
+        .btn-send {
+            background: var(--accent);
+            color: black;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-style: italic;
+            padding: 1.2rem;
+            border-radius: 1.2rem;
+            width: 100%;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(242, 169, 0, 0.2);
+        }
+        .btn-send:active { transform: scale(0.95); }
+    </style>
+</head>
+<body class="pb-10">
+
+    <!-- Header -->
+    <div class="app-header py-4 px-6 flex justify-between items-center">
+        <button onclick="toggleMenu()" class="text-white p-1">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+        <div class="text-[10px] font-black italic bg-white/10 text-white px-3 py-1 rounded-full uppercase tracking-widest">Support</div>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleMenu()"></div>
+    <nav id="sidebar" class="sidebar p-8">
+        <div class="mb-10 text-2xl font-black italic uppercase">
+            CRYPTO<span class="text-yellow-500">MASTER</span>
+        </div>
+        <div class="flex flex-col gap-6">
+            <a href="index.html" class="text-white/70 hover:text-white font-bold italic uppercase tracking-tighter">Calculator</a>
+            <a href="nieuws.html" class="text-white/70 hover:text-white font-bold italic uppercase tracking-tighter">Nieuws</a>
+            <a href="gids.html" class="text-white/70 hover:text-white font-bold italic uppercase tracking-tighter">Gids</a>
+            <a href="faq.html" class="text-white/70 hover:text-white font-bold italic uppercase tracking-tighter">FAQ</a>
+            <a href="tools.html" class="text-white/70 hover:text-white font-bold italic uppercase tracking-tighter">Alle Tools</a>
+            <a href="contact.html" class="text-yellow-500 font-bold italic uppercase tracking-tighter flex items-center gap-2">
+                <span class="w-2 h-2 bg-yellow-500 rounded-full"></span> Contact
+            </a>
+        </div>
+    </nav>
+
+    <div class="p-6 max-w-md mx-auto space-y-8">
+        
+        <header>
+            <h1 class="text-5xl font-black italic tracking-tighter uppercase leading-none mb-2">SAY <span class="text-yellow-500">HELLO</span></h1>
+            <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Vragen over cryptobelasting?</p>
+        </header>
+
+        <!-- Quick Links -->
+        <div class="grid grid-cols-2 gap-4">
+            <a href="mailto:hevzakelijk@gmail.com" class="contact-card text-center flex flex-col items-center justify-center gap-2 border-yellow-500/20 hover:border-yellow-500/50 transition-all">
+                <svg width="24" height="24" fill="none" stroke="var(--accent)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                <span class="text-[10px] font-black uppercase italic">Email ons</span>
+            </a>
+            <a href="https://x.com" target="_blank" class="contact-card text-center flex flex-col items-center justify-center gap-2 border-blue-500/20 hover:border-blue-500/50 transition-all">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                <span class="text-[10px] font-black uppercase italic">X / Twitter</span>
+            </a>
+        </div>
+
+        <!-- Contact Form -->
+        <section class="contact-card space-y-6">
+            <h2 class="text-xl font-black italic uppercase tracking-tight">Stuur een bericht</h2>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="text-[10px] font-black text-slate-500 uppercase ml-2 mb-1 block italic">Jouw Naam</label>
+                    <input type="text" placeholder="bijv. Satoshi" class="input-field">
+                </div>
+                
+                <div>
+                    <label class="text-[10px] font-black text-slate-500 uppercase ml-2 mb-1 block italic">Email Adres</label>
+                    <input type="email" placeholder="naam@voorbeeld.nl" class="input-field">
+                </div>
+
+                <div>
+                    <label class="text-[10px] font-black text-slate-500 uppercase ml-2 mb-1 block italic">Bericht</label>
+                    <textarea rows="4" placeholder="Waar kunnen we je mee helpen?" class="input-field"></textarea>
+                </div>
+
+                <button onclick="sendMessage()" class="btn-send">Bericht Verzenden</button>
+            </div>
+        </section>
+
+        <!-- Footer Info -->
+        <div class="text-center space-y-2 opacity-40">
+            <p class="text-[9px] font-bold uppercase tracking-widest leading-relaxed">
+                CryptoMaster Pro 2026<br>
+                Onderdeel van cryptobelasting.online
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('sidebarOverlay').classList.toggle('active');
+        }
+
+        function sendMessage() {
+            alert("Bedankt voor je bericht! We nemen zo snel mogelijk contact met je op.");
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
