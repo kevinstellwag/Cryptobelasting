@@ -253,6 +253,12 @@
             document.getElementById('future-total').innerText = '€' + result.toLocaleString('nl-NL', {maximumFractionDigits: 0});
         }
         range.addEventListener('input', updateMoon);
+
+		function toggleMenu() {
+    document.getElementById('sidebar').classList.toggle('active');
+    document.getElementById('sidebarOverlay').classList.toggle('active');
+}
+
     </script>
 </body>
 </html>
