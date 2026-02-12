@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2701308923489266"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CryptoMaster Pro | Live Nieuws</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <script defer src="/_vercel/insights/script.js"></script>
+    <style>
+        :root { --accent: #f2a900; --bg: #020617; }
+        body { background: var(--bg); color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .app-header { background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; z-index: 50; }
+        .app-card { background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.7)); border: 1px solid rgba(255,255,255,0.05); border-radius: 2rem; }
+        .bottom-nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 1rem; display: flex; justify-content: space-around; z-index: 100; }
+        .btn-press:active { transform: scale(0.95); transition: 0.1s; }
+    </style>
+</head>
+
+<body class="pb-32">
+
+    <!-- Top Status Bar -->
+    <div class="app-header py-4 px-6 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="w-3 h-3 bg-yellow-500 rounded-full animate-pulse"></div>
+            <span class="text-[10px] font-extrabold uppercase tracking-widest opacity-60">Live News Feed</span>
+        </div>
+        <div class="text-[10px] font-black italic bg-yellow-500 text-black px-3 py-1 rounded-full">UPDATE: 2026</div>
+    </div>
+
+    <div class="p-4 space-y-6 max-w-md mx-auto">
+        <header class="py-4 text-center">
+            <h1 class="text-4xl font-black italic tracking-tighter uppercase leading-none">CRYPTO<span class="text-yellow-500">NEWS</span></h1>
+            <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.3em] mt-1">Real-time markt updates</p>
+        </header>
+
+        <!-- Nieuws Feed Container -->
+         <div class="glass p-6 rounded-[2.5rem] border border-white/5 overflow-hidden" style="height: 600px;">
+                <h3 class="text-xs font-black text-slate-500 mb-4 uppercase tracking-widest text-yellow-500 italic">Markt Updates</h3>
+                <div class="tradingview-widget-container" style="height: 500px; width: 100%;">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+                    {
+                      "feedMode": "all_symbols",
+                      "isTransparent": true,
+                      "displayMode": "regular",
+                      "width": "100%",
+                      "height": "100%",
+                      "colorTheme": "dark",
+                      "locale": "nl"
+                    }
+                    </script>
+                </div>
+            </div>
+
+        <!-- Affiliate / Bitvavo Card (Hetzelfde als origineel) -->
+        <a href="JOUW_LINK" target="_blank" class="btn-press block relative overflow-hidden app-card p-6 bg-gradient-to-br from-yellow-500 to-orange-600 text-black">
+            <div class="relative z-10">
+                <p class="text-[10px] font-black uppercase mb-1">Beste NL Exchange</p>
+                <h3 class="text-3xl font-black italic uppercase leading-none mb-1">BITVAVO</h3>
+                <p class="text-[11px] font-bold">Handel de eerste €10.000 gratis.</p>
+            </div>
+        </a>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="bottom-nav shadow-2xl">
+    <a href="index.html" class="flex flex-col items-center gap-1">
+        <div class="w-6 h-6 bg-white rounded-lg"></div>
+        <span class="text-[8px] font-black uppercase">Home</span>
+    </a>
+    <a href="nieuws.html" class="flex flex-col items-center gap-1">
+        <div class="w-6 h-6 bg-white rounded-lg"></div>
+        <span class="text-[8px] font-black uppercase">Nieuws</span>
+    </a>
+    <a href="gids.html" class="flex flex-col items-center gap-1">
+        <div class="w-6 h-6 bg-white rounded-lg"></div>
+        <span class="text-[8px] font-black uppercase">Gids</span>
+    </a>
+</nav>
+
+
+    <script>
+        async function loadNews() {
+            const container = document.getElementById('news-container');
+            // Gratis CryptoCompare API (geen key nodig voor basis nieuws)
+            const url = 'https://min-api.cryptocompare.com';
+
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                
+                if (data.Data && data.Data.length > 0) {
+                    container.innerHTML = ''; // Leeg de lader
+                    data.Data.slice(0, 8).forEach(item => {
+                        container.innerHTML += `
+                            <a href="${item.url}" target="_blank" class="btn-press block app-card overflow-hidden">
+                                <div class="flex flex-col">
+                                    <img src="${item.imageurl}" class="w-full h-40 object-cover opacity-80" alt="news">
+                                    <div class="p-5 space-y-2">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-[8px] font-black bg-white/10 px-2 py-0.5 rounded text-yellow-500 uppercase tracking-widest">${item.source_info.name}</span>
+                                        </div>
+                                        <h4 class="text-sm font-extrabold leading-tight group-hover:text-yellow-500">${item.title}</h4>
+                                    </div>
+                                </div>
+                            </a>`;
+                    });
+                }
+            } catch (e) {
+                container.innerHTML = '<p class="text-center text-slate-500 py-10 text-xs uppercase font-black">Nieuws kon niet laden. Controleer je internet.</p>';
+            }
+        }
+
+        // Start de lader
+        loadNews();
+    </script>
+</body>
+</html>
