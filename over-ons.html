@@ -21,9 +21,62 @@
             border-radius: 2rem;
         }
         .text-glow { text-shadow: 0 0 15px rgba(242, 169, 0, 0.4); }
+
+        /* Sidebar Nav */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(20px);
+    z-index: 1000;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-right: 1px solid rgba(255,255,255,0.1);
+}
+.sidebar.active { left: 0; }
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    z-index: 999;
+}
+.sidebar-overlay.active { display: block; }
+
     </style>
 </head>
 <body class="min-h-screen pb-12">
+    <div class="py-4 px-6 flex justify-between items-center relative z-50">
+    <button onclick="toggleMenu()" class="text-white p-1">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
+    <div class="flex items-center gap-2">
+        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+        <span class="text-[10px] font-black uppercase tracking-widest opacity-60">2026 LIVE</span>
+    </div>
+</div>
+
+<!-- Sidebar Menu -->
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleMenu()"></div>
+<nav id="sidebar" class="sidebar p-8">
+    <div class="mb-10 text-2xl font-black italic uppercase tracking-tighter">CRYPTO<span class="text-yellow-500">MASTER</span></div>
+    <div class="flex flex-col gap-6 font-bold italic uppercase tracking-tighter text-sm">
+        <a href="index.html" class="text-white/70 hover:text-white">Home</a>
+        <a href="koersen.html" class="text-white/70 hover:text-white">Peilkoersen</a>
+        <a href="nieuws.html" class="text-white/70 hover:text-white">Nieuws</a>
+        <a href="contact.html" class="text-white/70 hover:text-white">Contact</a>
+        <a href="over-ons.html" class="text-yellow-500 flex items-center gap-2 border-t border-white/10 pt-4 mt-2">
+            <span class="w-1.5 h-1.5 bg-yellow-500 rounded-full"></span> Over Ons
+        </a>
+    </div>
+</nav>
 
     <div class="p-6 max-w-md mx-auto space-y-8">
         
@@ -96,6 +149,11 @@
         </footer>
 
     </div>
-
+    <script>
+    function toggleMenu() {
+        document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('sidebarOverlay').classList.toggle('active');
+    }
+</script>
 </body>
 </html>
