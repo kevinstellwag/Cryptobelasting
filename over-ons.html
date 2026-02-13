@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Over CryptoMaster Pro - Jouw Privacy & Vermogen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <style>
+        :root { --accent: #f2a900; --bg: #020617; }
+        body { 
+            background: var(--bg); 
+            color: #f8fafc; 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-image: radial-gradient(circle at 50% -20%, #1e293b 0%, #020617 80%);
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 2rem;
+        }
+        .text-glow { text-shadow: 0 0 15px rgba(242, 169, 0, 0.4); }
+    </style>
+</head>
+<body class="min-h-screen pb-12">
+
+    <div class="p-6 max-w-md mx-auto space-y-8">
+        
+        <!-- Header Section -->
+        <header class="pt-10 pb-4 text-center">
+            <div class="inline-block px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 mb-4">
+                <span class="text-[10px] font-black text-yellow-500 uppercase tracking-[0.2em]">Missie & Privacy</span>
+            </div>
+            <h1 class="text-4xl font-black italic tracking-tighter uppercase leading-none text-glow">
+                OVER <span class="text-yellow-500">ONS</span>
+            </h1>
+        </header>
+
+        <!-- Privacy Section -->
+        <section class="glass-card p-6 space-y-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                </div>
+                <h2 class="text-xl font-black italic uppercase tracking-tight">Geen Data Opslag</h2>
+            </div>
+            <p class="text-slate-400 text-sm leading-relaxed font-medium italic">
+                Bij CryptoMaster Pro geloven we in de fundamentele waarde van crypto: <span class="text-white font-bold">Privacy</span>. 
+                Wij slaan jouw ingevulde gegevens, wallet-waardes of tickers <span class="text-yellow-500 uppercase">nooit</span> op. 
+                Alle berekeningen vinden plaats in je eigen browser (Client-Side). Zodra je de pagina sluit, is alles weg.
+            </p>
+        </section>
+
+        <!-- Simulatie Info -->
+        <section class="glass-card p-6 space-y-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                </div>
+                <h2 class="text-xl font-black italic uppercase tracking-tight">De Simulatie</h2>
+            </div>
+            <p class="text-slate-400 text-sm leading-relaxed font-medium italic">
+                De Nederlandse belastingwetgeving voor 2026 is complex. Onze tool is ontwikkeld om crypto-beleggers een <span class="text-white font-bold">realistische indicatie</span> te geven van hun toekomstige belastingdruk (Box 3). 
+                We gebruiken de meest recente peilkoersen en voorgestelde fictieve rendementen.
+            </p>
+        </section>
+
+        <!-- Waarom Wij? -->
+        <div class="grid grid-cols-2 gap-4">
+            <div class="glass-card p-4 text-center">
+                <span class="block text-2xl mb-1">⚡</span>
+                <span class="text-[10px] font-black uppercase text-slate-500">Snelheid</span>
+                <p class="text-[11px] font-bold italic">Real-time resultaten</p>
+            </div>
+            <div class="glass-card p-4 text-center">
+                <span class="block text-2xl mb-1">🎯</span>
+                <span class="text-[10px] font-black uppercase text-slate-500">Accuraat</span>
+                <p class="text-[11px] font-bold italic">Peildata 2025</p>
+            </div>
+        </div>
+
+        <!-- Terug Knop -->
+        <div class="pt-4">
+            <a href="index.html" class="block w-full bg-white/5 border border-white/10 p-5 rounded-3xl text-center font-black uppercase italic tracking-widest hover:bg-white/10 transition-all">
+                ← Terug naar Dashboard
+            </a>
+        </div>
+
+        <!-- Juridische Disclaimer -->
+        <footer class="p-5 bg-red-500/5 border border-red-500/10 rounded-[2rem]">
+            <p class="text-[9px] text-red-400 font-black uppercase mb-2 tracking-widest">Juridische Disclaimer</p>
+            <p class="text-[10px] text-slate-500 leading-tight font-bold italic">
+                CryptoMaster Pro verleent geen financieel advies. De getoonde waardes zijn simulaties. Raadpleeg altijd een gecertificeerd adviseur voor uw definitieve belastingaangifte.
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
