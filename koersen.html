@@ -202,7 +202,14 @@
         }
 
         // Starten bij laden
-        window.onload = () => renderTable();
+        window.onload = () => {
+    if (typeof cryptoDatabase !== 'undefined') {
+        renderTable(cryptoDatabase);
+    } else {
+        console.error("Fout: crypto-data.js is niet goed geladen of cryptoDatabase ontbreekt.");
+    }
+};
+
     </script>
 </body>
 </html>
