@@ -6,179 +6,203 @@
     <link rel="icon" href="logo.png" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Peilkoersen Check - CryptoMaster Pro</title>
+    <title>Peilkoersen - CryptoMaster Pro</title>
+    
+    <!-- Scripts & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
-    <script defer src="/_vercel/insights/script.js"></script>
+    <script src="crypto-data.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
     <style>
         :root { --accent: #f2a900; --bg: #020617; }
-        body { background: var(--bg); color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
-        
-        .app-header { background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; z-index: 50; }
+        body { 
+            background: var(--bg); 
+            color: #f8fafc; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-        /* Sidebar */
-        .sidebar { position: fixed; top: 0; left: -100%; width: 280px; height: 100%; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(20px); z-index: 1000; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); border-right: 1px solid rgba(255,255,255,0.1); }
+        /* App Header Style */
+        .app-header {
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        /* Sidebar Nav */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
         .sidebar.active { left: 0; }
-        .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; z-index: 999; }
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            z-index: 999;
+        }
         .sidebar-overlay.active { display: block; }
 
-        /* Year Toggle */
-        .year-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
-        .year-btn.active { background: var(--accent); color: black; border-color: var(--accent); font-weight: 900; }
+        /* Custom Input */
+        .search-input {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 1.2rem;
+            padding: 1rem 1.5rem;
+            width: 100%;
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+        .search-input:focus { border-color: var(--accent); background: rgba(255,255,255,0.1); }
 
-        /* Table */
-        .crypto-row { background: rgba(255, 255, 255, 0.02); border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .input-search { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; padding: 0.8rem 1.2rem; width: 100%; color: white; outline: none; transition: 0.3s; }
-        .input-search:focus { border-color: var(--accent); background: rgba(255,255,255,0.08); }
+        /* List Items */
+        .crypto-item {
+            background: rgba(255, 255, 255, 0.02);
+            transition: 0.2s;
+        }
+        .crypto-item:hover { background: rgba(255, 255, 255, 0.05); }
     </style>
 </head>
 <body class="pb-10">
 
-    <!-- Header -->
+    <!-- Top Status Bar -->
     <div class="app-header py-4 px-6 flex justify-between items-center">
         <button onclick="toggleMenu()" class="text-white p-1">
-            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
         </button>
         <div class="text-[10px] font-black italic bg-yellow-500 text-black px-3 py-1 rounded-full uppercase tracking-tighter">Database 2024-2025</div>
     </div>
 
     <!-- Sidebar Menu -->
     <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleMenu()"></div>
-    <nav id="sidebar" class="sidebar p-8">
+    <nav id="sidebar" class="sidebar p-8 text-sm">
         <div class="mb-10 text-2xl font-black italic uppercase">CRYPTO<span class="text-yellow-500">MASTER</span></div>
-        <div class="flex flex-col gap-6">
-            <a href="index.html" class="text-white/70 font-bold italic uppercase tracking-tighter">Home</a>
-            <a href="koersen.html" class="text-yellow-500 font-bold italic uppercase tracking-tighter flex items-center gap-2">
-                <span class="w-2 h-2 bg-yellow-500 rounded-full"></span> Peilkoersen
+        <div class="flex flex-col gap-6 font-bold italic uppercase tracking-tighter">
+            <a href="index.html" class="text-white/70 hover:text-white">Home / Calculator</a>
+            <a href="koersen.html" class="text-yellow-500 flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-yellow-500 rounded-full"></span> Peilkoersen
             </a>
-          <a href="nieuws.html" class="text-white/70 hover:text-white font-bold italic uppercase tracking-tighter">Nieuws</a>
-          <a href="gids.html" class="text-white/70 hover:text-white font-bold italic uppercase tracking-tighter">Belasting Gids</a>
-          <a href="faq.html" class="text-white/70 font-bold italic uppercase tracking-tighter">Veelgestelde vragen</a>
-            <a href="tools.html" class="text-white/70 font-bold italic uppercase tracking-tighter">Alle Tools</a>
-            <a href="contact.html" class="text-white/70 font-bold italic uppercase tracking-tighter">Contact</a>
+            <a href="tools.html" class="text-white/70 hover:text-white">Alle Tools</a>
+            <a href="faq.html" class="text-white/70 hover:text-white">FAQ</a>
+            <a href="contact.html" class="text-white/70 hover:text-white">Contact</a>
         </div>
+    </nav>
 
-    <div class="absolute bottom-8 left-8 right-8">
-        <div class="p-4 bg-white/5 rounded-2xl border border-white/10">
-            <p class="text-[10px] font-black text-slate-500 uppercase italic">Support</p>
-            <p class="text-[11px] text-white/50">Hulp nodig bij je aangifte? Check onze gids.</p>
-        </div>
-    </div>
-</nav>
-
-    <div class="p-6 max-w-md mx-auto space-y-6">
+    <div class="p-6 max-w-md mx-auto space-y-8">
+        
         <header>
-            <h1 class="text-4xl font-black italic tracking-tighter uppercase leading-none mb-2">Peil<span class="text-yellow-500">Koersen</span></h1>
-            <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em]">Officiële Box 3 waarden</p>
+            <h1 class="text-5xl font-black italic tracking-tighter uppercase leading-none mb-2">PEIL<span class="text-yellow-500">KOERSEN</span></h1>
+            <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em] opacity-60">Officiële Box 3 waarden</p>
         </header>
 
-        <!-- Search & Filter Controls -->
-        <div class="space-y-4">
-            <input type="text" id="searchInput" onkeyup="filterData()" placeholder="Zoek op naam of ticker (bijv. BTC)..." class="input-search text-sm">
-            
-            <div class="flex gap-2">
-                <button onclick="setYear(2024)" id="btn2024" class="year-btn active flex-1 py-3 rounded-xl text-[10px] uppercase font-black tracking-widest">1 Jan 2024</button>
-                <button onclick="setYear(2025)" id="btn2025" class="year-btn flex-1 py-3 rounded-xl text-[10px] uppercase font-black tracking-widest">1 Jan 2025</button>
+        <!-- Zoekbalk -->
+        <div class="relative">
+            <input type="text" id="searchInput" onkeyup="filterData()" placeholder="Zoek munt of ticker..." class="search-input text-sm">
+            <div class="absolute right-4 top-3.5 opacity-30">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
         </div>
 
-        <!-- Koersen Lijst -->
-        <div class="rounded-3xl border border-white/10 bg-white/5 overflow-hidden">
-            <div id="cryptoList" class="divide-y divide-white/5">
-                <!-- Data komt hier via JS -->
+        <!-- Lijst Container -->
+        <div class="rounded-[2rem] border border-white/10 bg-white/5 overflow-hidden shadow-2xl">
+            <!-- Header van de lijst -->
+            <div class="grid grid-cols-3 px-6 py-4 text-[9px] font-black uppercase text-slate-500 bg-white/5 tracking-widest border-b border-white/5">
+                <span>Munt</span>
+                <span class="text-center">Jan '24</span>
+                <span class="text-right">Jan '25</span>
+            </div>
+
+            <!-- Dynamische Inhoud -->
+            <div id="crypto-body" class="divide-y divide-white/5">
+                <!-- JavaScript vult dit -->
             </div>
         </div>
 
+        <!-- No Results Message -->
         <div id="noResults" class="hidden text-center py-10 text-slate-500 italic text-sm">Geen munten gevonden...</div>
+
+        <!-- Footer Info -->
+        <div class="p-6 bg-white/5 rounded-3xl border border-white/5">
+            <p class="text-[9px] text-slate-500 uppercase font-black mb-2 italic tracking-widest">Fiscaal Advies</p>
+            <p class="text-[10px] leading-relaxed opacity-50 font-bold italic">
+                Gebruik deze koersen voor je vermogensrendementsheffing in Box 3. De Belastingdienst hanteert altijd de waarde van 1 januari om 00:00 uur.
+            </p>
+        </div>
     </div>
 
     <script>
-        let currentYear = 2024;
-        const cryptoData = [
-            { name: "Bitcoin", ticker: "BTC", p2024: 38210, p2025: 88420 },
-            { name: "Ethereum", ticker: "ETH", p2024: 2071, p2025: 3420 },
-            { name: "Solana", ticker: "SOL", p2024: 92.45, p2025: 184.10 },
-            { name: "Ripple", ticker: "XRP", p2024: 0.56, p2025: 2.35 },
-            { name: "Cardano", ticker: "ADA", p2024: 0.54, p2025: 0.58 },
-            { name: "Dogecoin", ticker: "DOGE", p2024: 0.081, p2025: 0.38 },
-            { name: "Avalanche", ticker: "AVAX", p2024: 34.80, p2025: 39.50 },
-            { name: "Polkadot", ticker: "DOT", p2024: 7.45, p2025: 6.90 },
-            { name: "Chainlink", ticker: "LINK", p2024: 13.50, p2025: 17.10 },
-            { name: "Polygon", ticker: "MATIC", p2024: 0.89, p2025: 0.42 },
-            { name: "Sui", ticker: "SUI", p2024: 0.71, p2025: 3.20 },
-            { name: "Fetch.ai", ticker: "FET", p2024: 0.64, p2025: 1.45 },
-            { name: "Pepe", ticker: "PEPE", p2024: 0.0000012, p2025: 0.000011 },
-            { name: "Litecoin", ticker: "LTC", p2024: 65.20, p2025: 82.10 },
-            { name: "Near", ticker: "NEAR", p2024: 3.35, p2025: 5.10 },
-            { name: "Render", ticker: "RNDR", p2024: 4.20, p2025: 7.80 },
-            { name: "Vechain", ticker: "VET", p2024: 0.031, p2025: 0.028 },
-            { name: "Kaspa", ticker: "KAS", p2024: 0.098, p2025: 0.14 },
-            { name: "Shiba Inu", ticker: "SHIB", p2024: 0.000009, p2025: 0.000024 },
-            { name: "Bonk", ticker: "BONK", p2024: 0.000012, p2025: 0.000035 },
-            { name: "Injective", ticker: "INJ", p2024: 32.10, p2025: 24.50 },
-            { name: "Optimism", ticker: "OP", p2024: 3.45, p2025: 1.85 },
-            { name: "Celestia", ticker: "TIA", p2024: 11.20, p2025: 5.40 },
-            { name: "Stacks", ticker: "STX", p2024: 1.85, p2025: 1.95 },
-            { name: "Arbitrum", ticker: "ARB", p2024: 1.45, p2025: 0.75 },
-            { name: "Sei", ticker: "SEI", p2024: 0.52, p2025: 0.48 },
-            { name: "Worldcoin", ticker: "WLD", p2024: 3.20, p2025: 2.10 },
-            { name: "Beam", ticker: "BEAM", p2024: 0.018, p2025: 0.022 },
-            { name: "Bittensor", ticker: "TAO", p2024: 245.00, p2025: 540.00 },
-            { name: "Jupiter", ticker: "JUP", p2024: 0.00, p2025: 1.15 } // JUP bestond nog niet begin 2024
-            // Voeg hier de rest toe tot 50...
-        ];
-
-        function renderData(filterText = "") {
-            const list = document.getElementById('cryptoList');
+        // Functie om de lijst te bouwen
+        function renderTable(filterText = "") {
+            const container = document.getElementById('crypto-body');
             const noResults = document.getElementById('noResults');
-            const filtered = cryptoData.filter(coin => 
-                coin.name.toLowerCase().includes(filterText.toLowerCase()) || 
-                coin.ticker.toLowerCase().includes(filterText.toLowerCase())
+            
+            // Filteren vanuit de centrale database (crypto-data.js)
+            const filtered = cryptoDatabase.filter(munt => 
+                munt.name.toLowerCase().includes(filterText.toLowerCase()) || 
+                munt.ticker.toLowerCase().includes(filterText.toLowerCase())
             );
 
-            if(filtered.length === 0) {
+            // Toon melding als er niets is
+            if (filtered.length === 0) {
                 noResults.classList.remove('hidden');
-                list.innerHTML = "";
-            } else {
-                noResults.classList.add('hidden');
-                list.innerHTML = filtered.map(coin => {
-                    const price = currentYear === 2024 ? coin.p2024 : coin.p2025;
-                    const priceDisplay = price === 0 ? "N/A" : "€" + price.toLocaleString('nl-NL', { minimumFractionDigits: 2 });
-                    return `
-                        <div class="flex justify-between items-center p-5 crypto-row">
-                            <div>
-                                <span class="block text-white font-black italic uppercase text-sm">${coin.name}</span>
-                                <span class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">${coin.ticker}</span>
-                            </div>
-                            <div class="text-right">
-                                <span class="block text-lg font-black italic ${currentYear === 2025 ? 'text-yellow-500' : 'text-white/80'}">${priceDisplay}</span>
-                                <span class="text-[8px] text-slate-500 uppercase font-bold">Peilkoers ${currentYear}</span>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
+                container.innerHTML = "";
+                return;
             }
+
+            noResults.classList.add('hidden');
+
+            // Bouw de rijen op
+            container.innerHTML = filtered.map(munt => `
+                <div class="grid grid-cols-3 items-center p-5 crypto-item">
+                    <div>
+                        <span class="block text-white font-black italic uppercase text-xs leading-tight">${munt.name}</span>
+                        <span class="text-[8px] text-slate-500 font-bold uppercase tracking-widest">${munt.ticker}</span>
+                    </div>
+                    <div class="text-center text-slate-400 font-bold italic text-xs">
+                        €${munt.p2024.toLocaleString('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </div>
+                    <div class="text-right text-yellow-500 font-black italic text-xs">
+                        €${munt.p2025.toLocaleString('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function setYear(year) {
-            currentYear = year;
-            document.getElementById('btn2024').classList.toggle('active', year === 2024);
-            document.getElementById('btn2025').classList.toggle('active', year === 2025);
-            filterData();
-        }
-
+        // Zoekfunctie koppelen aan input
         function filterData() {
-            const text = document.getElementById('searchInput').value;
-            renderData(text);
+            const term = document.getElementById('searchInput').value;
+            renderTable(term);
         }
 
+        // Sidebar functies
         function toggleMenu() {
-            document.getElementById('sidebar').classList.toggle('active');
-            document.getElementById('sidebarOverlay').classList.toggle('active');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
         }
 
-        // Initial load
-        renderData();
+        // Starten bij laden
+        window.onload = () => renderTable();
     </script>
 </body>
 </html>
