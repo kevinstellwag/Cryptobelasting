@@ -11,7 +11,7 @@
     <!-- Scripts & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
-    <script src="crypto-data.js" type="module"></script>
+    <script src="crypto-data.js"</script>
 <script defer src="/_vercel/insights/script.js"></script>
     <style>
         :root { --accent: #f2a900; --bg: #020617; }
@@ -280,9 +280,24 @@
         }
 
         window.onload = () => {
-            loadCoins();
-            calculate();
-        };
+    // 1. Vul de dropdown met munten uit de database
+    const select = document.getElementById('coinSelect');
+    if (select && typeof cryptoDatabase !== 'undefined') {
+        // Behoud de eerste 'kies' optie, wis de rest
+        select.innerHTML = '<option value="">-- Kies een munt --</option>';
+        
+        cryptoDatabase.forEach(coin => {
+            let info = document.createElement('option');
+            info.value = coin.ticker;
+            info.text = `${coin.name} (${coin.ticker})`;
+            select.appendChild(info);
+        });
+    }
+
+    // 2. Start je bestaande functies
+    if (typeof loadCoins === "function") loadCoins();
+    if (typeof calculate === "function") calculate();
+};
     </script>
 </body>
 </html>
