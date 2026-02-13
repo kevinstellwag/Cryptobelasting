@@ -129,7 +129,7 @@
         <!-- FAQ Items -->
         <div class="space-y-4">
             <!-- Vraag 1 -->
-            <div class="faq-card" onclick="toggleFaq(this)">
+            <div class="faq-card search-item" onclick="toggleFaq(this)">
                 <div class="faq-question">
                     <span class="font-bold italic uppercase text-sm tracking-tight">Hoeveel crypto is belastingvrij?</span>
                     <svg class="chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
@@ -140,7 +140,7 @@
             </div>
 
             <!-- Vraag 2 -->
-            <div class="faq-card" onclick="toggleFaq(this)">
+            <div class="faq-card search-item" onclick="toggleFaq(this)">
                 <div class="faq-question">
                     <span class="font-bold italic uppercase text-sm tracking-tight">Welke datum telt voor de koers?</span>
                     <svg class="chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
@@ -151,7 +151,7 @@
             </div>
 
             <!-- Vraag 3 -->
-            <div class="faq-card" onclick="toggleFaq(this)">
+            <div class="faq-card search-item" onclick="toggleFaq(this)">
                 <div class="faq-question">
                     <span class="font-bold italic uppercase text-sm tracking-tight">Wat is de DAC8 richtlijn?</span>
                     <svg class="chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
@@ -162,7 +162,7 @@
             </div>
 
             <!-- Vraag 4 -->
-            <div class="faq-card" onclick="toggleFaq(this)">
+            <div class="faq-card search-item" onclick="toggleFaq(this)">
                 <div class="faq-question">
                     <span class="font-bold italic uppercase text-sm tracking-tight">Moet ik staking-rewards opgeven?</span>
                     <svg class="chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
@@ -174,7 +174,7 @@
         </div>
 
             <!-- Vraag 5 -->
-            <div class="faq-card" onclick="toggleFaq(this)">
+           <div class="faq-card search-item" onclick="toggleFaq(this)">
                 <div class="faq-question">
                     <span class="font-bold italic uppercase text-sm tracking-tight">Kan de Belastingdienst mijn crypto-transacties zien?</span>
                     <svg class="chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
@@ -185,7 +185,7 @@
             </div>
 
             <!-- Vraag 6 -->
-            <div class="faq-card" onclick="toggleFaq(this)">
+           <div class="faq-card search-item" onclick="toggleFaq(this)">
                 <div class="faq-question">
                     <span class="font-bold italic uppercase text-sm tracking-tight">Moet ik mijn crypto opgeven als ik verlies heb gemaakt?</span>
                     <svg class="chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
@@ -195,7 +195,7 @@
                 </div>
             </div>
 
-        <div class="faq-card" onclick="toggleFaq(this)">
+       <div class="faq-card search-item" onclick="toggleFaq(this)">
                 <div class="faq-question">
                     <span class="font-bold italic uppercase text-sm tracking-tight">Valt mijn crypto in Box 1 of Box 3?</span>
                     <svg class="chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
@@ -205,7 +205,7 @@
                 </div>
             </div>
 
-        <div class="faq-card" onclick="toggleFaq(this)">
+        <div class="faq-card search-item" onclick="toggleFaq(this)">
                 <div class="faq-question">
                     <span class="font-bold italic uppercase text-sm tracking-tight">Hoe zit het met belasting over staking-rewards?</span>
                     <svg class="chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
@@ -215,7 +215,7 @@
                 </div>
             </div>
 
-        <div class="faq-card" onclick="toggleFaq(this)">
+        <div class="faq-card search-item" onclick="toggleFaq(this)">
                 <div class="faq-question">
                     <span class="font-bold italic uppercase text-sm tracking-tight"> Wat verandert er in het nieuwe belastingstelsel van 2027/2028?</span>
                     <svg class="chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
@@ -225,7 +225,7 @@
                 </div>
             </div>
 
-        <div class="faq-card" onclick="toggleFaq(this)">
+       <div class="faq-card search-item" onclick="toggleFaq(this)">
                 <div class="faq-question">
                     <span class="font-bold italic uppercase text-sm tracking-tight">Is er een aparte vrijstelling voor crypto?</span>
                     <svg class="chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
@@ -260,6 +260,28 @@
             // Toggle huidige item
             element.classList.toggle('open');
         }
+
+    const searchBar = document.getElementById('searchBar');
+    const faqCards = document.querySelectorAll('.search-item');
+
+    searchBar.addEventListener('input', (e) => {
+        const searchString = e.target.value.toLowerCase().trim();
+
+        faqCards.forEach(card => {
+            // Pak de tekst van de vraag en het antwoord samen
+            const questionText = card.querySelector('.faq-question').textContent.toLowerCase();
+            const answerText = card.querySelector('.faq-answer').textContent.toLowerCase();
+            const combinedText = questionText + ' ' + answerText;
+
+            if (combinedText.includes(searchString)) {
+                card.style.display = 'block'; // Toon kaart
+            } else {
+                card.style.display = 'none';  // Verberg kaart
+            }
+        });
+    });
+
+
     </script>
 </body>
 </html>
