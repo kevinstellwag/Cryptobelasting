@@ -83,7 +83,20 @@
         /* Sliders */
         input[type="range"] { -webkit-appearance: none; height: 8px; border-radius: 10px; background: #1e293b; width: 100%; }
         input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; background: var(--accent); border-radius: 50%; border: 4px solid #000; box-shadow: 0 0 15px rgba(242, 169, 0, 0.4); }
-    </style>
+
+		/* Fix voor witte tekst in dropdown op laptops */
+#coinSelect {
+    background-color: white !important;
+    color: #333 !important; /* Donkergrijze tekst */
+}
+
+/* Zorg dat de opties in de lijst ook leesbaar zijn */
+#coinSelect option {
+    background-color: white;
+    color: #333;
+}
+
+	</style>
 </head>
 <body class="pb-10">
 
