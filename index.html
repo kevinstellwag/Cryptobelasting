@@ -141,15 +141,18 @@
             </div>
 
             <div class="space-y-4">
-                <div class="space-y-2">
-                    <p class="text-[10px] font-black text-slate-500 uppercase ml-2 italic">Aankoop (€)</p>
-                    <input type="number" id="buy" class="huge-input" placeholder="0">
-                </div>
-                <div class="space-y-2">
-                    <p class="text-[10px] font-black text-slate-500 uppercase ml-2 italic">Huidig (€)</p>
-                    <input type="number" id="sell" class="huge-input" placeholder="0">
-                </div>
-            </div>
+    <div class="space-y-2">
+        <p class="text-[10px] font-black text-slate-500 uppercase ml-2 italic">Totaal Vermogen op 1 Jan (€)</p>
+        <!-- Mensen vullen hier hun totale crypto-waarde in -->
+        <input type="number" id="totalWealth" class="huge-input" placeholder="€0">
+    </div>
+    <!-- Optioneel: Fiscale partner switch voor dubbele vrijstelling -->
+    <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/5">
+        <span class="text-[10px] font-black uppercase italic text-slate-400">Fiscaal Partner?</span>
+        <input type="checkbox" id="partner" class="w-5 h-5 accent-yellow-500" onchange="calculate()">
+    </div>
+</div>
+
 
             <button onclick="calculate()" class="btn-press w-full bg-yellow-500 text-black py-5 rounded-[1.5rem] font-black text-xl uppercase italic shadow-[0_10px_20px_rgba(242,169,0,0.2)]">
                 Bereken Winst
@@ -231,23 +234,31 @@
 </nav>
 
     <script>
-        function calculate() {
-            const b = parseFloat(document.getElementById('buy').value);
-            const s = parseFloat(document.getElementById('sell').value);
-            
-            if(isNaN(b) || isNaN(s)) return alert("Vul bedragen in!");
+       function calculate() {
+    const wealth = parseFloat(document.getElementById('totalWealth').value) || 0;
+    const hasPartner = document.getElementById('partner').checked;
 
-            const profit = s - b;
-            const vrijstelling = 59357;
-            let tax = s > vrijstelling ? (s - vrijstelling) * 0.06 * 0.36 : 0;
-            
-            document.getElementById('p-val').innerText = '€' + profit.toLocaleString('nl-NL');
-            document.getElementById('t-val').innerText = '-€' + tax.toLocaleString('nl-NL', {maximumFractionDigits: 0});
-            document.getElementById('final-val').innerText = '€' + (profit - tax).toLocaleString('nl-NL', {maximumFractionDigits: 0});
-            document.getElementById('results').classList.remove('hidden');
-            
-            updateMoon();
-        }
+    // Officiële cijfers (voorstel 2026)
+    const vrijstellingPerPersoon = 59357; 
+    const totaleVrijstelling = hasPartner ? vrijstellingPerPersoon * 2 : vrijstellingPerPersoon;
+    
+    // Alleen belasting over het deel boven de vrijstelling
+    const belastbaarVermogen = Math.max(0, wealth - totaleVrijstelling);
+    
+    // Berekening: Belastbaar x Fictief Rendement (6,04%) x Tarief (36%)
+    const rendement = belastbaarVermogen * 0.0604;
+    const belasting = rendement * 0.36;
+
+    // Update de resultaten
+    document.getElementById('p-val').innerText = '€' + belastbaarVermogen.toLocaleString('nl-NL'); // Het deel waar je belasting over betaalt
+    document.getElementById('t-val').innerText = '€' + belasting.toLocaleString('nl-NL', {maximumFractionDigits: 0});
+    
+    // "Netto" is hier minder relevant, "Vrijstelling gebruikt" is interessanter
+    document.getElementById('final-val').innerText = '€' + (wealth - belasting).toLocaleString('nl-NL', {maximumFractionDigits: 0});
+    
+    document.getElementById('results').classList.remove('hidden');
+}
+
 
         const range = document.getElementById('future-range');
         function updateMoon() {
