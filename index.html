@@ -140,6 +140,16 @@
                 <span class="text-[10px] text-slate-500 font-bold uppercase">Box 3: €59.357 Vrij</span>
             </div>
 
+           <section class="app-card p-6 space-y-6">
+            <div class="flex justify-between items-center">
+                <h2 class="text-xl font-extrabold italic uppercase">Calculator</h2>
+				<a href="koersen.html" class="flex items-center gap-1.5 text-[9px] text-slate-500 hover:text-yellow-500 font-bold uppercase tracking-wider transition-colors border-b border-slate-800 pb-0.5">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        Bekijk de pijlkoersen!
+    </a>
+                <span class="text-[10px] text-slate-500 font-bold uppercase">Box 3: €59.357 Vrij</span>
+            </div>
+
             <div class="space-y-4">
     <div class="space-y-2">
         <p class="text-[10px] font-black text-slate-500 uppercase ml-2 italic">Totaal Vermogen op 1 Jan (€)</p>
@@ -152,7 +162,6 @@
         <input type="checkbox" id="partner" class="w-5 h-5 accent-yellow-500" onchange="calculate()">
     </div>
 </div>
-
 
             <button onclick="calculate()" class="btn-press w-full bg-yellow-500 text-black py-5 rounded-[1.5rem] font-black text-xl uppercase italic shadow-[0_10px_20px_rgba(242,169,0,0.2)]">
                 Bereken Winst
@@ -234,30 +243,26 @@
 </nav>
 
     <script>
-       function calculate() {
+      function calculate() {
     const wealth = parseFloat(document.getElementById('totalWealth').value) || 0;
     const hasPartner = document.getElementById('partner').checked;
 
-    // Officiële cijfers (voorstel 2026)
-    const vrijstellingPerPersoon = 59357; 
-    const totaleVrijstelling = hasPartner ? vrijstellingPerPersoon * 2 : vrijstellingPerPersoon;
+    const vrijstelling = hasPartner ? 118714 : 59357; 
+    const belastbaarVermogen = Math.max(0, wealth - vrijstelling);
     
-    // Alleen belasting over het deel boven de vrijstelling
-    const belastbaarVermogen = Math.max(0, wealth - totaleVrijstelling);
-    
-    // Berekening: Belastbaar x Fictief Rendement (6,04%) x Tarief (36%)
-    const rendement = belastbaarVermogen * 0.0604;
-    const belasting = rendement * 0.36;
+    // De fiscus rekent met 6,04% fictief rendement en 36% tarief
+    const belasting = belastbaarVermogen * 0.0604 * 0.36;
 
-    // Update de resultaten
-    document.getElementById('p-val').innerText = '€' + belastbaarVermogen.toLocaleString('nl-NL'); // Het deel waar je belasting over betaalt
-    document.getElementById('t-val').innerText = '€' + belasting.toLocaleString('nl-NL', {maximumFractionDigits: 0});
+    // Update UI met begrijpelijke termen
+    document.getElementById('p-val').innerText = '€' + belastbaarVermogen.toLocaleString('nl-NL');
+    document.getElementById('t-val').innerText = '€' + Math.round(belasting).toLocaleString('nl-NL');
     
-    // "Netto" is hier minder relevant, "Vrijstelling gebruikt" is interessanter
-    document.getElementById('final-val').innerText = '€' + (wealth - belasting).toLocaleString('nl-NL', {maximumFractionDigits: 0});
+    // Netto vermogen na belasting
+    document.getElementById('final-val').innerText = '€' + Math.round(wealth - belasting).toLocaleString('nl-NL');
     
     document.getElementById('results').classList.remove('hidden');
 }
+
 
 
         const range = document.getElementById('future-range');
