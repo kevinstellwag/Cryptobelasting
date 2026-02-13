@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
+	<script src="crypto-data.js"></script>
 	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2701308923489266"
      crossorigin="anonymous"></script>
     <link rel="icon" href="logo.png" type="image/x-icon">
@@ -94,7 +95,17 @@
                 </div>
             </div>
         </section>
-
+ <div class="p-5 bg-red-500/10 border border-red-500/20 rounded-[2rem] shadow-lg">
+            <div class="flex items-center gap-2 mb-2">
+                <svg width="16" height="16" fill="red" viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.45L20.53 20H3.47L12 5.45zM11 16h2v2h-2v-2zm0-7h2v5h-2V9z""")/>></svg>
+                <p class="text-[10px] font-black text-red-500 uppercase italic tracking-widest">Fiscale Waarschuwing</p>
+            </div>
+            <p class="text-[10px] text-slate-400 leading-relaxed font-bold italic">
+                Vanaf 2026 worden cryptogegevens via de <span class="text-white">DAC8-richtlijn</span> automatisch gedeeld. 
+                Het niet opgeven van vermogen kan leiden tot boetes tot 300%. 
+                <a href="https://www.belastingdienst.nl" target="_blank" class="text-yellow-500 underline decoration-yellow-500/30">Check Belastingdienst.nl</a>
+            </p>
+        </div>
         <!-- Moon Simulator -->
         <section class="app-card p-6 space-y-4">
             <h3 class="text-lg font-black italic uppercase text-blue-400">Moon Simulator</h3>
@@ -134,19 +145,18 @@
             }
         }
 
-        function calculate() {
-            const wealth = parseFloat(document.getElementById('wealth').value) || 0;
-            const partner = document.getElementById('partner').checked;
-            const vrijstelling = partner ? 118714 : 59357; //
-            
-            const taxable = Math.max(0, wealth - vrijstelling);
-            const tax = taxable * 0.06 * 0.36; // Fictief rendement 6% x Tarief 36%
-
-            document.getElementById('taxable').innerText = '€' + Math.round(taxable).toLocaleString('nl-NL');
-            document.getElementById('tax').innerText = '€' + Math.round(tax).toLocaleString('nl-NL');
-            document.getElementById('netto').innerText = '€' + Math.round(wealth - tax).toLocaleString('nl-NL');
-            updateMoon();
-        }
+        function updatePrice() {
+    const ticker = document.getElementById('coinSelect').value;
+    const coin = cryptoDatabase.find(c => c.ticker === ticker);
+    const amount = parseFloat(document.getElementById('amount').value) || 0;
+    
+    if (coin) {
+        // We pakken hier de koers van 2025 voor de 2026 aangifte
+        const valueOnJan1 = coin.p2025 * amount;
+        document.getElementById('wealth').value = Math.round(valueOnJan1);
+        calculate(); // Bereken direct de belasting
+    }
+}
 
         function updateMoon() {
             const target = parseInt(document.getElementById('moon-range').value);
@@ -159,9 +169,20 @@
             const result = currentWealth * multiplier;
             document.getElementById('moon-result').innerText = '€' + Math.round(result).toLocaleString('nl-NL');
         }
-        
+		
         // Initialiseer
         updateMoon();
+
+		function loadCoinOptions() {
+    const select = document.getElementById('coinSelect');
+    cryptoDatabase.forEach(coin => {
+        let opt = document.createElement('option');
+        opt.value = coin.ticker;
+        opt.innerHTML = `${coin.name} (${coin.ticker})`;
+        select.appendChild(opt);
+    });
+}
+window.onload = loadCoinOptions;
     </script>
 </body>
 </html>
